@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="ws.productOutOfStock">
+        <value xml:lang="en">The product with ID {0} (item line index {1}) is no longer in stock. Please try reducing the quantity or removing the product from this order.</value>
+        <value xml:lang="it">l prodotto con codice {0} (ordinale riga carrello {1}) non è più in giacenza. Per favore prova a ridurre la quantità o rimuovi il prodotto da questo ordine.</value>
+    </property>
+
+</resource>

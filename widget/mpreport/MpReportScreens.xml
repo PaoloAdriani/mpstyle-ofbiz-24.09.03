@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="MpReportCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="salesReport">
+        <section>
+            <actions>
+                <set field="headerItem" value="salesReport"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="MpReportCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <screenlet title="Sales Report">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="newSalesReport"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="orderReport">
+        <section>
+            <actions>
+                <set field="headerItem" value="orderReport"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="MpReportCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <screenlet title="Order Report">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="newOrderReport"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="customerOrderReport">
+        <section>
+            <actions>
+                <set field="headerItem" value="customerOrderReport"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="MpReportCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <screenlet title="Customer Order Report">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="newCustomerOrderReport"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="reportConfig">
+        <section>
+            <widgets>
+                <decorator-screen name="CommonConfigurationDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <entity-condition entity-name="SystemProperty" list="systemProperties">
+                                    <condition-expr field-name="systemResourceId" operator="equals" value="mpreport"/>
+                                </entity-condition>
+                            </actions>
+                            <widgets>
+                                <screenlet title="Configuration">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="ListSystemProperties"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="SystemProperties">
+        <section>
+            <widgets>
+                <decorator-screen name="CommonConfigurationDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <entity-condition entity-name="SystemProperty" list="systemProperties">
+                                    <condition-expr field-name="systemResourceId" operator="equals" value="mpstyle"/>
+                                </entity-condition>
+                            </actions>
+                            <widgets>
+                                <screenlet title="Configuration Properties">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="ListSystemProperties"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="NewSystemProperty">
+        <section>
+            <widgets>
+                <decorator-screen name="CommonConfigurationDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <screenlet title="${uiLabelMap.NewSystemProperty} ${uiLabelMap.CommonOf} mpstyle">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="NewSystemProperty"/>
+                                </screenlet>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditSystemProperty">
+        <section>
+            <widgets>
+                <decorator-screen name="CommonConfigurationDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <entity-one value-field="systemProperty" entity-name="SystemProperty">
+                                    <field-map field-name="systemResourceId" from-field="parameters.systemResourceId"/>
+                                    <field-map field-name="systemPropertyId" from-field="parameters.systemPropertyId"/>
+                                </entity-one>
+                            </actions>
+                            <widgets>
+                                <screenlet title="${uiLabelMap.SystemProperty} ${uiLabelMap.CommonOf} mpstyle">
+                                    <include-form location="component://mpstyle/widget/mpreport/MpReportForms.xml" name="EditSystemProperty"/>
+                                </screenlet>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+            <fail-widgets>
+                <label style="h3">${uiLabelMap.MpReportViewPermissionError}</label>
+            </fail-widgets>
+        </section>
+    </screen>
+
+</screens>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+    
+    
+    <form name="ListSystemProperties" type="multi" list-name="systemProperties"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <field name="systemResourceId"><hidden/></field>
+        <field name="systemPropertyId"><display/></field>
+        <field name="systemPropertyValue"><display/></field>
+        <field name="description"><display/></field>
+        <field name="editLink" widget-style="buttontext" title=" ">
+           <hyperlink target="editsystemproperty" description="${uiLabelMap.CommonEdit}">
+                <parameter param-name="systemResourceId"/>
+                <parameter param-name="systemPropertyId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" widget-style="buttontext" title=" ">
+           <hyperlink target="removesystemproperty" description="${uiLabelMap.CommonDelete}" request-confirmation="true">
+                <parameter param-name="systemResourceId"/>
+                <parameter param-name="systemPropertyId"/>
+            </hyperlink>
+        </field>
+    </form>
+    
+    <form name="NewSystemProperty" type="single" target="createsystemproperty">
+        <field name="systemResourceId"><display/></field>
+        <field name="systemPropertyId" required-field="true"><text size="100"/></field>
+        <field name="systemPropertyValue" required-field="true"><text size="100"/></field>
+        <field name="description" required-field="true"><textarea cols="60" rows="2"/></field>
+        <field name="dummy99" title=" "><display/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}" widget-style="buttontext" >
+            <submit button-type="button"/>
+        </field>
+    </form>
+    
+    <form name="EditSystemProperty" type="single" target="updatesystemproperty" default-map-name="systemProperty">
+        <field name="systemResourceId"><display/></field>
+        <field name="systemPropertyId"><display/></field>
+        <field name="systemPropertyValue" required-field="true"><text size="100"/></field>
+        <field name="description" title="${uiLabelMap.CommonDescription}" required-field="true"><textarea cols="60" rows="2"/></field>
+        <field name="dummy99" title=" "><display/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonUpdate}" widget-style="buttontext" >
+            <submit button-type="button" request-confirmation="true"/>
+        </field>
+    </form>
+    
+    <form name="newSalesReport" type="single" target="createSalesReport">
+        <field name="reportFromDate"><date-time type="timestamp"/></field>
+        <field name="reportThruDate"><date-time type="timestamp"/></field>
+        <field name="mailToAddress" required-field="true"><text size="60"/></field>
+        <field name="mailCcAddress" required-field="false"><text size="60"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="buttontext" >
+            <submit button-type="button"/>
+        </field>
+    </form>
+    
+    <form name="newOrderReport" type="single" target="createOrderReport">
+        <field name="reportFromDate"><date-time type="timestamp"/></field>
+        <field name="reportThruDate"><date-time type="timestamp"/></field>
+        <field name="mailToAddress" required-field="true"><text size="60"/></field>
+        <field name="mailCcAddress" required-field="false"><text size="60"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="buttontext" >
+            <submit button-type="button"/>
+        </field>
+    </form>
+    
+    <form name="newCustomerOrderReport" type="single" target="createCustomerOrderReport">
+        <field name="reportFromDate"><date-time type="timestamp"/></field>
+        <field name="reportThruDate"><date-time type="timestamp"/></field>
+        <field name="mailToAddress" required-field="true"><text size="60"/></field>
+        <field name="mailCcAddress" required-field="false"><text size="60"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="buttontext" >
+            <submit button-type="button"/>
+        </field>
+    </form>
+
+
+</forms>
