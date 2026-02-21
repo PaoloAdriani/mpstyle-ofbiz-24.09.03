@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,7 +31,10 @@ import java.util.List;
 public class MpFileUtil {
     
     public static final String MODULE = MpFileUtil.class.getName();
-    
+    public static final String CSV_PIPE_SEPARATOR = "\\|";
+    public static final String CSV_SEMICOLON_SEPARATOR = ";";
+    public static final String CSV_COMMA_SEPARATOR = ",";
+
     /**
      * 
      * 
@@ -291,7 +296,6 @@ public class MpFileUtil {
     public static List<DataQOHErp> readCvs(String filename, String splitByChar) {
         
         String line = "";
-        //String cvsSplitBy = "\\|";
         List<DataQOHErp> arrayData = null;
         
         if(filename == null || UtilValidate.isEmpty(filename)) {
@@ -312,23 +316,31 @@ public class MpFileUtil {
 
             while ((line = br.readLine()) != null) {
 
-                // use comma as separator
                 String[] data = line.split(splitByChar);
 
                 if(data.length == 3) {
-                    DataQOHErp lineData = new DataQOHErp(data[0].trim(),data[1].trim(),data[2].trim());
+                    String facilityId = data[0].trim();
+                    String variantProductId = data[1].trim();
+                    String availStr = data[2].trim();
+                    BigDecimal availability;
+                    try {
+                        availability = new BigDecimal(availStr).setScale(0, RoundingMode.HALF_UP);
+                    } catch (NumberFormatException e) {
+                        String msg = "Error in converting availability value for Facility-SKU [" + facilityId + "-" + variantProductId + "]. Skipping line. Msg => " + e.getMessage();
+                        Debug.logError(msg, MODULE);
+                        continue;
+                    }
+                    DataQOHErp lineData = new DataQOHErp(facilityId,variantProductId,availability);
                     arrayData.add(lineData);
-                }else{
-                    Debug.logWarning("Found more than 3 fields in csv file [" + filename + "]. Abort.", MODULE);
+                } else {
+                    Debug.logWarning("Found more than 3 fields in csv file [" + filename + "] in line [" + line + "]. Abort.", MODULE);
                     return null;
                 }
-
             }
 
             br.close();
 
         } catch (IOException e) {
-
             Debug.logError(e, e.getMessage(), MODULE);
             return null;
         }

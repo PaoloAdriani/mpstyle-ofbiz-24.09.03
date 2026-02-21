@@ -1,15 +1,14 @@
 package mpstyle.edi.data;
 
+import java.math.BigDecimal;
+
 public class DataQOHErp {
 
     private String facility;
     private String article;
-    private String availability;
-	
-    public DataQOHErp() {};
+    private BigDecimal availability;
 
-    public DataQOHErp(String facility, String article, String availability) {
-            super();
+    public DataQOHErp(String facility, String article, BigDecimal availability) {
             this.facility = facility;
             this.article = article;
             this.availability = availability;
@@ -26,10 +25,10 @@ public class DataQOHErp {
     public void setArticle(String article) {
             this.article = article;
     }
-    public String getAvailability() {
+    public BigDecimal getAvailability() {
             return availability;
     }
-    public void setAvailability(String availability) {
+    public void setAvailability(BigDecimal availability) {
             this.availability = availability;
     }
 	

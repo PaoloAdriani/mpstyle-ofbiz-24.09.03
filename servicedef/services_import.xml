@@ -37,5 +37,16 @@ under the License.
         <attribute name="filenamepath" 	mode="IN"	type="String" 	optional="true" default-value="PRD_"/>
         <attribute name="messages" 	mode="OUT"	type="String" 	optional="false"/>
     </service>
+
+    <service name="ERPavailabilityimporter" engine="groovy"
+             location="component://mpstyle/src/main/groovy/importer/CSVImportServices.groovy" auth="false"
+             invoke="elaborateCsvFileList" transaction-timeout="7200">
+        <description>ERP Importing Availability NOTA: INSERIRE SOLO PATH ASSOLUTI</description>
+        <attribute name="toreadpath" mode="IN" type="String" optional="false"/>
+        <attribute name="historytowritepath" mode="IN" type="String" optional="false"/>
+        <attribute name="username" mode="IN" type="String" optional="false"/>
+        <attribute name="password" mode="IN" type="String" optional="false"/>
+        <attribute name="status" mode="OUT" type="String" optional="true"/>
+    </service>
     
 </services>
