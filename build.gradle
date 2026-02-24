@@ -19,17 +19,17 @@
 
 dependencies {
     /*Tutte le tue dipendenze, una sola volta
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.15.2'
-    implementation 'commons-io:commons-io:2.21.0'
-    implementation 'org.apache.cxf:cxf-rt-frontend-jaxrs:4.1.4'
-    implementation 'org.apache.cxf:cxf-rt-rs-client:4.1.4'
-    implementation 'org.apache.cxf:cxf-rt-transports-http-hc:4.1.4'
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    pluginLibsCompile 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    pluginLibsCompile 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    pluginLibsCompile 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    pluginLibsCompile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.15.2'
+    pluginLibsCompile 'commons-io:commons-io:2.21.0'
+    pluginLibsCompile 'org.apache.cxf:cxf-rt-frontend-jaxrs:4.1.4'
+    pluginLibsCompile 'org.apache.cxf:cxf-rt-rs-client:4.1.4'
+    pluginLibsCompile 'org.apache.cxf:cxf-rt-transports-http-hc:4.1.4'
+    pluginLibsCompile 'javax.xml.bind:jaxb-api:2.3.1'
+    */
 
-     */
 
 }
 

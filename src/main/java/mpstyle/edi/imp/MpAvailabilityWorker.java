@@ -640,7 +640,7 @@ public class MpAvailabilityWorker {
      * @return
      */
     public static Map<String, Object> importAvailabilityCsvFile(String absoluteFilenamePath, String historyDirPath,
-                                                                String username, String password, Delegator delegator, LocalDispatcher dispatcher) {
+                                                                String username, String password, GenericValue userLogin, Delegator delegator, LocalDispatcher dispatcher) {
 
         Map<String, Object> returnMap = null;
         boolean moved = false;
@@ -656,7 +656,7 @@ public class MpAvailabilityWorker {
         }
 
         //reading active seasons form SystemProperty (comma separated list)
-        String activeSeasonsProp = EntityUtilProperties.getPropertyValue("mpomni", "ecomActiveSeasons", delegator);
+        String activeSeasonsProp = EntityUtilProperties.getPropertyValue("mpedi", "ecomActiveSeasons", delegator);
 
         boolean allSeasons = false;
         ArrayList<String> activeSeasonList = null;
@@ -819,7 +819,7 @@ public class MpAvailabilityWorker {
 
                 try {
                     srvResultMap = dispatcher.runSync("createInventoryItem",
-                            UtilMisc.toMap("facilityId", _dataFacilityId, "inventoryItemTypeId", "NON_SERIAL_INV_ITEM", "productId", _dataVariantId, "statusId", "INV_AVAILABLE"));
+                            UtilMisc.toMap("facilityId", _dataFacilityId, "inventoryItemTypeId", "NON_SERIAL_INV_ITEM", "productId", _dataVariantId, "login.username", username, "login.password", password, "statusId", "INV_AVAILABLE"));
                 } catch (GenericServiceException e) {
                     String msg = "Error in running service createInventoryItem for facilityId [" + _dataFacilityId + "], variantId [" + _dataVariantId + "]. Msg => " + e.getMessage();
                     return ServiceUtil.returnError(msg);

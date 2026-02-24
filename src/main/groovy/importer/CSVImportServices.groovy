@@ -16,6 +16,8 @@ def elaborateCsvFileList() {
     String username = parameters.username
     String password = parameters.password
 
+    println "userLogin **********************"+userLogin
+
     def resultMap = [:]
     def importedFiles = ""
     def notImportedFiles = ""
@@ -31,7 +33,7 @@ def elaborateCsvFileList() {
 
     for(String filename : filesFromFolder) {
 
-        Map<String, Object> importStatusMap = MpAvailabilityWorker.importAvailabilityCsvFile(filename, historyPath, username, password)
+        Map<String, Object> importStatusMap = MpAvailabilityWorker.importAvailabilityCsvFile(filename, historyPath, username, password, userLogin, delegator, dispatcher)
 
         if (!ServiceUtil.isSuccess(importStatusMap)) {
             String msg = ServiceUtil.getErrorMessage(importStatusMap);
