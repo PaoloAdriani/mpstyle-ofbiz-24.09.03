@@ -667,7 +667,7 @@ public class MpAvailabilityWorker {
         } else {
             if (activeSeasonsProp.contains(MpFileUtil.CSV_COMMA_SEPARATOR)) {
                 String []seasonsArray = activeSeasonsProp.split(MpFileUtil.CSV_COMMA_SEPARATOR);
-                activeSeasonList = (ArrayList) Arrays.asList(seasonsArray);
+                activeSeasonList = new ArrayList<>(Arrays.asList(seasonsArray));
             } else {
                 activeSeasonList = new ArrayList<>();
                 activeSeasonList.add(activeSeasonsProp);
