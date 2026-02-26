@@ -667,7 +667,7 @@ public class MpAvailabilityWorker {
         } else {
             if (activeSeasonsProp.contains(MpFileUtil.CSV_COMMA_SEPARATOR)) {
                 String []seasonsArray = activeSeasonsProp.split(MpFileUtil.CSV_COMMA_SEPARATOR);
-                activeSeasonList = (ArrayList) Arrays.asList(seasonsArray);
+                activeSeasonList = new ArrayList<>(Arrays.asList(seasonsArray));
             } else {
                 activeSeasonList = new ArrayList<>();
                 activeSeasonList.add(activeSeasonsProp);
@@ -939,8 +939,8 @@ public class MpAvailabilityWorker {
      * @param dispatcher
      * @return
      */
-    public static Map<String, Object> importXMLFile(String absoluteFilenamePath, String historyDirPath, Integer txTimeout,
-                                                 String username, String password, String nowDateStr, LocalDispatcher dispatcher) {
+    public static Map<String, Object> importXMLFile(String absoluteFilenamePath, String historyDirPath,
+                                                 String username, String password,  Integer txTimeout, String nowDateStr, LocalDispatcher dispatcher) {
 
         Map<String, Object> returnMap = null;
         boolean moved = false;
