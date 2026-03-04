@@ -37,7 +37,7 @@ under the License.
                         <include-screen name="orderHeader" location="component://order/widget/ordermgr/OrderViewScreens.xml"/>
                         <container style="clear"/>
                         <platform-specific>
-                            <html><html-template location="component://mpstyle/template/ordermgr/order/orderitems.ftl"/></html>
+                            <html><html-template location="component://mpstyle/template/ordermgr/order/OrderItems.ftl"/></html>
                         </platform-specific>
                         <platform-specific>
                             <html><html-template location="component://order/template/order/OrderNotes.ftl"/></html>
