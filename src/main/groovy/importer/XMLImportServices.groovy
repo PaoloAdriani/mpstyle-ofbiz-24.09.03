@@ -24,7 +24,7 @@ def elaborateXMLFileList() {
     String filenamepath = parameters.filenamepath
     Integer timeout 	= Integer.parseInt(parameters.timeout)
 
-    def SYSTEM_RESOURCE_ID = "mpreport"
+    def SYSTEM_RESOURCE_ID = "mpedi"
 
     Date nowDate = UtilDateTime.nowDate()
     String nowDateString = UtilDateTime.toDateTimeString(nowDate)
@@ -35,8 +35,8 @@ def elaborateXMLFileList() {
     def status = ""
 
     //Retrieve email parameters
-    String mailFromAddress = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "report.mail.fromAddress",null, delegator)
-    String mailToAddress = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "report.mail.toAddress",null, delegator)
+    String mailFromAddress = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "edi.mail.fromAddress",null, delegator)
+    String mailToAddress = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "0h",null, delegator)
 
     List<String> filesFromFolderWP = MpFileUtil.readWithPath(path, filenamepath)
 
@@ -53,7 +53,7 @@ def elaborateXMLFileList() {
 
     for(String filename : filesFromFolderWP) {
 
-        logInfo("Processing file => " + filename, method)
+        logInfo("Processing file => " + filename)
 
         importFileResultMap  = MpAvailabilityWorker.importXMLFile(filename.trim(), historyPath.trim(), username, password,timeout, nowDateString, dispatcher)
 
@@ -79,6 +79,7 @@ def elaborateXMLFileList() {
     }
 
     //Send a notification email with the status of the import
+    /*
     if(filesFromFolderWP.size() > 0) {
         String bodyMsg = "Service: XMLEntityImporterMPS \n Service Status: " + status
         "\n Not Imported Files: [" + notImportedFiles + "] \n Run Time: " + nowDateString
@@ -91,6 +92,11 @@ def elaborateXMLFileList() {
     } else {
         resultMap.messages = "No files processed for import"
     }
+    */
+
+    boolean sent = false;
+
+    resultMap.messages = "Status: " + status + " - Imported files [" + importedFiles + "] - Not imported files [" + notImportedFiles + "] - Run Time [" + nowDateString + "] - Email sent: " + sent
 
     return resultMap
 

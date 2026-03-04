@@ -27,7 +27,7 @@ under the License.
     <!-- Import product xml -->
     <service name="XMLEntityImporterMPS" engine="groovy"
              location="component://mpstyle/src/main/groovy/importer/XMLImportServices.groovy" auth="false"
-             transaction-timeout="800" invoke="elaborateXMLFileList">
+             transaction-timeout="7200" invoke="elaborateXMLFileList">
         <description>XML Entity Importer MPS</description>
         <attribute name="toreadpath" mode="IN" type="String" optional="false"/>
         <attribute name="historytowritepath" mode="IN" type="String" optional="false"/>
