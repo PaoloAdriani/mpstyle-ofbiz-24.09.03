@@ -40,4 +40,8 @@ under the License.
                     description="Outdir customer order report"
                     />
 
+    <!-- Party Identification Types -->
+    <PartyIdentificationType description="TAX Identification Number" partyIdentificationTypeId="TAX_ID"/>
+    <PartyIdentificationType description="VAT Number" partyIdentificationTypeId="VAT_ID"/>
+
 </entity-engine-xml>
