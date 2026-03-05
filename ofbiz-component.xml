@@ -62,7 +62,7 @@ under the License.
 
     <!-- Customization of standard applications -->
     <webapp name="order"
-            title="MpStyle Order"
+            title="Order"
             server="default-server"
             location="webapp/ordermgr"
             base-permission="OFBTOOLS,ORDERMGR"
