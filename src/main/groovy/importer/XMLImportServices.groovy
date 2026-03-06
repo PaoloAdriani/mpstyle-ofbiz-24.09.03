@@ -33,6 +33,7 @@ def elaborateXMLFileList() {
     def importedFiles = ""
     def notImportedFiles = ""
     def status = ""
+    def error = false
 
     //Retrieve email parameters
     String mailFromAddress = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "edi.mail.fromAddress",null, delegator)
@@ -74,6 +75,7 @@ def elaborateXMLFileList() {
         status = "IMPORT SUCCESSFULL"
     } else if (totalFileCount == notImportedFileCount) {
         status = "IMPORT FAILED"
+        error = true
     } else {
         status = "IMPORT PARTIALLY SUCCESSFULL"
     }
@@ -96,7 +98,9 @@ def elaborateXMLFileList() {
 
     boolean sent = false;
 
-    resultMap.messages = "Status: " + status + " - Imported files [" + importedFiles + "] - Not imported files [" + notImportedFiles + "] - Run Time [" + nowDateString + "] - Email sent: " + sent
+    def statusMsg = "Status: " + status + " - Imported files [" + importedFiles + "] - Not imported files [" + notImportedFiles + "] - Run Time [" + nowDateString + "] - Email sent: " + sent
+    resultMap = error ? ServiceUtil.returnError(statusMsg) : ServiceUtil.returnSuccess(statusMsg)
+    resultMap.messages = statusMsg
 
     return resultMap
 
