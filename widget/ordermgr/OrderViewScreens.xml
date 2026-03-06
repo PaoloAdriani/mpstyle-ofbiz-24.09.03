@@ -32,7 +32,7 @@ under the License.
                 <script location="component://order/src/main/groovy/org/apache/ofbiz/order/order/OrderViewWebSecure.groovy"/>
             </actions>
             <widgets>
-                <decorator-screen name="CommonOrderViewDecorator">
+                <decorator-screen name="CommonOrderViewDecorator" location="component://order/widget/ordermgr/OrderViewScreens.xml">
                     <decorator-section name="body">
                         <include-screen name="orderHeader" location="component://order/widget/ordermgr/OrderViewScreens.xml"/>
                         <container style="clear"/>
