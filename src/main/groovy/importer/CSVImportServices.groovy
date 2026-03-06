@@ -22,6 +22,7 @@ def elaborateCsvFileList() {
     def importedFiles = ""
     def notImportedFiles = ""
     def status = ""
+    def error = false
 
     Date nowDate = UtilDateTime.nowDate()
     String nowDateString = UtilDateTime.toDateTimeString(nowDate)
@@ -52,12 +53,15 @@ def elaborateCsvFileList() {
         status = "IMPORT SUCCESSFULL"
     } else if (totalFileCount == notImportedFileCount) {
         status = "IMPORT FAILED"
+        error = true
     } else {
         status = "IMPORT PARTIALLY SUCCESSFULL"
     }
 
-    resultMap = ServiceUtil.returnSuccess()
-    resultMap.status = "Status: " + status + " - Imported files [" + importedFiles + "] - Not imported files [" + notImportedFiles + "] - Run Time [" + nowDateString + "]"
+    def statusMsg = "Status: " + status + " - Imported files [" + importedFiles + "] - Not imported files [" + notImportedFiles + "] - Run Time [" + nowDateString + "]"
+
+    resultMap = error ? ServiceUtil.returnError(statusMsg) : ServiceUtil.returnSuccess(statusMsg)
+    resultMap.status = statusMsg
 
     return resultMap
 
