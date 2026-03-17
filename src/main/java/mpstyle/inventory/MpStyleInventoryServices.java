@@ -13,6 +13,7 @@ import org.apache.ofbiz.entity.GenericEntityException;
 import org.apache.ofbiz.entity.GenericValue;
 import org.apache.ofbiz.entity.condition.EntityCondition;
 import org.apache.ofbiz.entity.condition.EntityOperator;
+import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.ofbiz.entity.util.EntityUtil;
 import org.apache.ofbiz.entity.util.EntityUtilProperties;
 import org.apache.ofbiz.service.DispatchContext;
@@ -36,7 +37,7 @@ public class MpStyleInventoryServices {
     
     public static final String MODULE = MpStyleInventoryServices.class.getName();
     
-    private static final String OMNI_SYSTEM_RESOURCE_ID = "mpomni";
+    private static final String MPSTYLE_SYSTEM_RESOURCE_ID = "mpstyle";
     private final static String NON_SERIAL_INV_ITEM_TYPE = "NON_SERIAL_INV_ITEM";
     
     /**
@@ -46,8 +47,7 @@ public class MpStyleInventoryServices {
      * @return 
      */
     public static Map<String, Object> updateInventoryERPAvailability(DispatchContext dctx, Map<String, Object> context) {
-        
-         
+
         Delegator delegator = dctx.getDelegator();
         LocalDispatcher dispatcher = (LocalDispatcher) dctx.getDispatcher();
         
@@ -58,12 +58,10 @@ public class MpStyleInventoryServices {
         List<String> returnMessageList = new ArrayList<>();
         boolean error = false;
         Map<String, Object> returnMap = null;
-        
-        
-        //user name and password for services
-        String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
-        String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
-        
+
+        //username and password for services
+        String username = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+        String password = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
         
         //Get AVAILABLE InventoryItem objects for the product in the specific facility
         EntityCondition cond = EntityCondition.makeCondition(EntityOperator.AND,
@@ -74,7 +72,8 @@ public class MpStyleInventoryServices {
         List<GenericValue> inventoryItemList = null;
         
         try {
-            inventoryItemList = delegator.findList("InventoryItem", cond, null, UtilMisc.toList("lastUpdatedStamp DESC"), null, false);
+            //inventoryItemList = delegator.findList("InventoryItem", cond, null, UtilMisc.toList("lastUpdatedStamp DESC"), null, false);
+            inventoryItemList = EntityQuery.use(delegator).from("InventoryItem").where(cond).orderBy("lastUpdatedStamp DESC").queryList();
         }catch(GenericEntityException gee) {
             String msg = "Error in retrieving InventoryItems for product ["+productId+"], in facility ["+facilityId+"]. Error is => "+gee.getMessage();
             Debug.logError(msg, MODULE);
@@ -86,7 +85,6 @@ public class MpStyleInventoryServices {
         */
         BigDecimal invItemATP = BigDecimal.ZERO;
         BigDecimal invItemQOH = BigDecimal.ZERO;
-        
         
         if(UtilValidate.isNotEmpty(inventoryItemList)) {
             
@@ -190,12 +188,9 @@ public class MpStyleInventoryServices {
                     invItemQOH = quantityOnHandTotal;
                     
                 }
-                
-           // } for
-            
-        }else{
+
+        } else {
             //no inventory item AVAILABLE found: create a new one
-            
             String newInventoryItemId = null;
             
             if(inputATP.compareTo(BigDecimal.ZERO) == -1) {

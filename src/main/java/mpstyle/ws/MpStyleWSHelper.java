@@ -32,7 +32,7 @@ public class MpStyleWSHelper {
     
     public static final String MODULE = MpStyleWSHelper.class.getName();
     
-    private static final String OMNI_SYSTEM_RESOURCE_ID = "mpomni";
+    private static final String MPSTYLE_SYSTEM_RESOURCE_ID = "mpstyle";
 
     
     /**
@@ -49,8 +49,8 @@ public class MpStyleWSHelper {
        Map<String, Object>  cartItemProductAvailabilityMap = null;
        
         //user name and password for services
-        String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
-        String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
+        String username = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+        String password = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
        
        if(iiObj == null) {
            Debug.logError("InventoryItems response object is null. Return empty map.", MODULE);

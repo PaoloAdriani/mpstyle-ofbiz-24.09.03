@@ -61,7 +61,8 @@ public class MpStyleWSEvents {
     
     public static final String MODULE = MpStyleWSEvents.class.getName();
     public static final String RESOURCE_ERROR = "MpStyleWSErrorUiLabels";
-    private static final String OMNI_SYSTEM_RESOURCE_ID = "mpomni";
+    private static final String MPEDI_SYSTEM_RESOURCE_ID = "mpedi";
+    private static final String MPSTYLE_SYSTEM_RESOURCE_ID = "mpstyle";
 
     /**
      * Wrapper for checking MpStyle availability process.
@@ -77,7 +78,7 @@ public class MpStyleWSEvents {
         ShoppingCart cart = ShoppingCartEvents.getCartObject(request);
         Locale locale = UtilHttp.getLocale(request);
         String result = "error";
-        boolean test = EntityUtilProperties.getPropertyAsBoolean(OMNI_SYSTEM_RESOURCE_ID, "wsavail.environment", false);
+        boolean test = EntityUtilProperties.getPropertyAsBoolean(MPEDI_SYSTEM_RESOURCE_ID, "wsavail.environment", false);
         boolean wsEmailNotifyEnabled = false;
         boolean useCustomLogger = false; 
         boolean cartModified = false;
@@ -94,28 +95,28 @@ public class MpStyleWSEvents {
         
         String productStoreId = cart.getProductStoreId();
         
-        String logfilename = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "wsavail.logfilename", delegator);
-        String logdirpath = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "wsavail.logdirpath", delegator);
-        String wsurl = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "wsavail.url", delegator);
-        String wspath = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "wsavail.path", delegator);
-        String wsSeasons = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "mpWsSeasons", delegator);
-        String wsFacilities = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "mpWsFacilities", delegator);
-        String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
-        String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
-        String wsMailNotify = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "ws.mail.notify", delegator);
+        String logfilename = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "wsavail.logfilename", delegator);
+        String logdirpath = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "wsavail.logdirpath", delegator);
+        String wsurl = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "wsavail.url", delegator);
+        String wspath = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "wsavail.path", delegator);
+        String wsSeasons = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "mpWsSeasons", delegator);
+        String wsFacilities = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "mpWsFacilities", delegator);
+        String username = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+        String password = EntityUtilProperties.getPropertyValue(MPSTYLE_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
+        String wsMailNotify = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "ws.mail.notify", delegator);
         if(wsMailNotify != null) {
             wsEmailNotifyEnabled = "Y".equals(wsMailNotify);
         }
         
-        String wsMailFromAddress = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "ws.mail.fromAddress", delegator);
-        String wsMailToAddress = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "ws.mail.toAddress", delegator);
-        String wsMailCcAddress = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "ws.mail.ccAddress", delegator);
+        String wsMailFromAddress = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "ws.mail.fromAddress", delegator);
+        String wsMailToAddress = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "ws.mail.toAddress", delegator);
+        String wsMailCcAddress = EntityUtilProperties.getPropertyValue(MPEDI_SYSTEM_RESOURCE_ID, "ws.mail.ccAddress", delegator);
         
         //Creation of the custom logger file
         MpStyleLogger logger = null;
         
         if(logfilename == null  || UtilValidate.isEmpty(logfilename.trim()) || logdirpath == null || UtilValidate.isEmpty(logdirpath.trim())) {
-            Debug.logWarning("Missing system properties [mpomni/wsavail.logfilename] and [mpomni/wsavail.logdirpath]. Cannot use custom logger file. Using standard only.", MODULE);
+            Debug.logWarning("Missing system properties [mpedi/wsavail.logfilename] and [mpedi/wsavail.logdirpath]. Cannot use custom logger file. Using standard only.", MODULE);
             useCustomLogger = false;
         }else{
             logger = new MpStyleLogger(delegator.getDelegatorTenantId(), logfilename.trim(), logdirpath.trim());
@@ -135,7 +136,7 @@ public class MpStyleWSEvents {
            auth problems. So do not perform the call and proceed anyway.
         */
         if(username == null || UtilValidate.isEmpty(username.trim()) || password == null || UtilValidate.isEmpty(password.trim())) {
-            String msg = "*** Service username and/or password not set as SystemProperty [mpomni/serviceUsername] and [mpomni/servicePassword]. Could not call services with authorization. Do not perform ws call.";
+            String msg = "*** Service username and/or password not set as SystemProperty [mpedi/serviceUsername] and [mpedi/servicePassword]. Could not call services with authorization. Do not perform ws call.";
             if(useCustomLogger) {
                 logger.logError(msg);
                 logger.logInfo("******** END (" + method + ") - Time: " + MpStyleUtil.getNowDateTimeString() + " ********\n");
@@ -151,7 +152,7 @@ public class MpStyleWSEvents {
         if(wsMailFromAddress == null || UtilValidate.isEmpty(wsMailFromAddress.trim()) || wsMailToAddress == null || UtilValidate.isEmpty(wsMailToAddress.trim())) {
             wsEmailNotifyEnabled = false;
             
-            String msg = "Missing one or both email system property [mpomni/ws.mail.fromAddress], [mpomni/ws.mail.toAddress]. Disable email notify.";
+            String msg = "Missing one or both email system property [mpedi/ws.mail.fromAddress], [mpedi/ws.mail.toAddress]. Disable email notify.";
             
             if(useCustomLogger) logger.logWarning(msg);
             Debug.logWarning(msg,MODULE);
@@ -173,7 +174,7 @@ public class MpStyleWSEvents {
         */
         if(wsSeasons == null || UtilValidate.isEmpty(wsSeasons.trim())) {
             
-            String msg = "Seasons not enabled for ws. Check SystemProperty [mpomni/mpWsSeasons]. Not doing the call.";
+            String msg = "Seasons not enabled for ws. Check SystemProperty [mpedi/mpWsSeasons]. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
@@ -190,7 +191,7 @@ public class MpStyleWSEvents {
         String []seasonArray = wsSeasons.split(",");
         
         if(seasonArray.length <= 0) {
-            String msg = "Splitted seasons array is empty. Check the SystemProperty [mpomni/mpWsSeasons]; put in values separated by commas. Not doing the call.";
+            String msg = "Splitted seasons array is empty. Check the SystemProperty [mpedi/mpWsSeasons]; put in values separated by commas. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
@@ -208,7 +209,7 @@ public class MpStyleWSEvents {
         */
         if(wsFacilities == null || UtilValidate.isEmpty(wsFacilities.trim())) {
             
-            String msg = "No facilities enabled for ws. Check SystemProperty [mpomni/mpWsFacilities]. Not doing the call.";
+            String msg = "No facilities enabled for ws. Check SystemProperty [mpedi/mpWsFacilities]. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
@@ -225,7 +226,7 @@ public class MpStyleWSEvents {
         String []wsFacilityArray = wsFacilities.split(",");
         
         if(wsFacilityArray.length <= 0) {
-            String msg = "Splitted facilities array is empty. Check the SystemProperty [mpomni/mpWsFacilities]; put in values separated by commas. Not doing the call.";
+            String msg = "Splitted facilities array is empty. Check the SystemProperty [mpedi/mpWsFacilities]; put in values separated by commas. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
@@ -241,7 +242,7 @@ public class MpStyleWSEvents {
         /* If ws url is not set cannot perform the call. */
         if(wsurl == null || UtilValidate.isEmpty(wsurl.trim())) {
             
-            String msg = "*** WebService URL for inventory availabilty is not set as SystemProperty [mpomni/wsavail.url]. Not doing the call.";
+            String msg = "*** WebService URL for inventory availabilty is not set as SystemProperty [mpedi/wsavail.url]. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
@@ -270,7 +271,7 @@ public class MpStyleWSEvents {
         /* If ws path is not set cannot perform the call. */
         if(wspath == null || UtilValidate.isEmpty(wspath.trim())) {
             
-            String msg = "*** WebService Path for inventory availabilty is not set as SystemProperty [mpomni/wsavail.path]. Not doing the call.";
+            String msg = "*** WebService Path for inventory availabilty is not set as SystemProperty [mpedi/wsavail.path]. Not doing the call.";
             
             if(useCustomLogger) {
                 logger.logError(msg);
