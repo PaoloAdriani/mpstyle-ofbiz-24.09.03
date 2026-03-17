@@ -40,6 +40,19 @@ under the License.
                     description="Outdir customer order report"
                     />
 
+    <!-- WebService System Properties -->
+    <SystemProperty description="List of facilities to be considered by availability ws(multiple values separated by comma)" systemPropertyId="mpWsFacilities" systemPropertyValue="10016" systemResourceId="mpedi"/>
+    <SystemProperty description="Seasons enabled for ws (separated by commas)" systemPropertyId="mpWsSeasons" systemPropertyValue="S6" systemResourceId="mpedi"/>
+    <SystemProperty description="Email Cc Address for ws notifies" systemPropertyId="ws.mail.ccAddress" systemResourceId="mpedi"/>
+    <SystemProperty description="Email From Address for ws notifies" systemPropertyId="ws.mail.fromAddress" systemPropertyValue="customercare@fisico.it" systemResourceId="mpedi"/>
+    <SystemProperty description="Enable/Disable ws emails (Y/N)" systemPropertyId="ws.mail.notify" systemPropertyValue="Y" systemResourceId="mpedi"/>
+    <SystemProperty description="Email To Address for ws notifies" systemPropertyId="ws.mail.toAddress" systemPropertyValue="giulio.speri@mpstyle.it,paolo.adriani@mpstyle.it" systemResourceId="mpedi"/>
+    <SystemProperty description="Flag to enable ws availability process." systemPropertyId="wsavail.environment" systemPropertyValue="false" systemResourceId="mpedi"/>
+    <SystemProperty description="WS Log Dir Absolute Path" systemPropertyId="wsavail.logdirpath" systemPropertyValue="/opt/ofbiz/OFBIZ_HOME/apache-ofbiz-13.07.03/hot-deploy/mpstyle/LOG/MPWS/" systemResourceId="mpedi"/>
+    <SystemProperty description="WS Log filename" systemPropertyId="wsavail.logfilename" systemPropertyValue="MPWS_AVAILABILITY" systemResourceId="mpedi"/>
+    <SystemProperty description="MpStyle WebService Target Resource" systemPropertyId="wsavail.path" systemPropertyValue="OlmarShopWs/InventoryItemRequest" systemResourceId="mpedi"/>
+    <SystemProperty description="MpStyle WebService Endpoint Url" systemPropertyId="wsavail.url" systemPropertyValue="https://ordiniweb.olmarandmirta.com/" systemResourceId="mpedi"/>
+
     <!-- Party Identification Types -->
     <PartyIdentificationType description="TAX Identification Number" partyIdentificationTypeId="TAX_ID"/>
     <PartyIdentificationType description="VAT Number" partyIdentificationTypeId="VAT_ID"/>
