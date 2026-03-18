@@ -34,6 +34,7 @@ under the License.
         <attribute name="prodCatalogId" mode="IN" type="String" optional="false"/>
         <attribute name="defaultViewSize" mode="IN" type="Integer" optional="false"/>
         <attribute name="limitView" mode="IN" type="Boolean" optional="true" default-value="false"/>
+        <attribute name="filterOutOfStockVariants" mode="IN" type="Boolean" optional="true" default-value="false"/>
         <attribute name="filteredProductCategoryMembers" type="java.util.Collection" mode="OUT" optional="true"/> <!-- this list will only contain the filtered members -->
         <attribute name="appliedFiltersByFeatureType" type="Map" mode="OUT" optional="true"/> <!-- filter applied by featureType -->
         <attribute name="filteredProductCategoryId" type="String" mode="OUT" optional="true"/> <!-- filtered Category -->
