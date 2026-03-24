@@ -97,9 +97,11 @@ def performCategoryFilterSearch() {
                 .cache(true)
                 .queryList()
 
+        logInfo("filterFeatureCategories retrieved for parentCategoryId ${ecFilterParentFeatureCategoryId}: ${filterFeatureCategories}")
+
         Map filterFeatureCategoryMap = [:].withDefault { "N/A" }
         if (filterFeatureCategories) {
-            filterFeatureCategories.collectEntries { gv -> [(gv.productFeatureCategoryId): gv.description] }
+            filterFeatureCategoryMap = filterFeatureCategories.collectEntries { gv -> [(gv.productFeatureCategoryId): gv.description] }
         }
 
         //Expand the filterFeatureMap checking if values passed in are featureId or featureCategoryId, and in this case retrieve the related featureIds to be used for filtering
