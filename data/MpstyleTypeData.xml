@@ -53,8 +53,18 @@ under the License.
     <SystemProperty description="MpStyle WebService Target Resource" systemPropertyId="wsavail.path" systemPropertyValue="OlmarShopWs/InventoryItemRequest" systemResourceId="mpedi"/>
     <SystemProperty description="MpStyle WebService Endpoint Url" systemPropertyId="wsavail.url" systemPropertyValue="https://ordiniweb.olmarandmirta.com/" systemResourceId="mpedi"/>
 
+    <!-- configurations for ecommerce custom filtering -->
+    <SystemProperty description="Parent Feature Category Id used for distinguish Feature Categories to be exposed as filters" systemPropertyId="catalog.ecFilterParentFeatureCategoryId" systemPropertyValue="EC_FILTER_PFCAT" systemResourceId="mpstyle"/>
+    <SystemProperty description="Filter priority among feature types. Applies only if catalog.filterOperator is AND" systemPropertyId="catalog.featureTypesFilterPrio" systemPropertyValue="SIZE,COLOR" systemResourceId="mpstyle"/>
+    <SystemProperty description="Catalog listing filter operator: OR/AND" systemPropertyId="catalog.filterOperator" systemPropertyValue="AND"  systemResourceId="mpstyle"/>
+
     <!-- Party Identification Types -->
     <PartyIdentificationType description="TAX Identification Number" partyIdentificationTypeId="TAX_ID"/>
     <PartyIdentificationType description="VAT Number" partyIdentificationTypeId="VAT_ID"/>
+
+    <!-- Product Feature Category: parent to distinguish Feature Categories to be used in the UI filters -->
+    <ProductFeatureCategory description="E-commerce parent filtering category" productFeatureCategoryId="EC_FILTER_PFCAT"/>
+
+
 
 </entity-engine-xml>
