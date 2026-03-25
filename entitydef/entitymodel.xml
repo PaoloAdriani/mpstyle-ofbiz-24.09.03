@@ -48,4 +48,10 @@ under the License.
         <prim-key field="appId"/>
     </entity>
 
+    <extend-entity entity-name="Facility">
+        <field name="mpFacilityId" type="id">
+            <description>MpStyle Facility ID</description>
+        </field>
+    </extend-entity>
+
 </entitymodel>
