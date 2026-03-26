@@ -185,9 +185,7 @@ public class CatalogUrlFilter implements Filter {
                                                 textData = UrlServletHelper.invalidCharacter(textData);
                                                 if (alternativeUrl.matches(textData + ".+$")) {
                                                     String productIdStr = null;
-                                                    //productIdStr = alternativeUrl.replace(textData + "-", "");
                                                     productIdStr = alternativeUrl.substring(textData.length() + 1);
-                                                    //productIdStr = productIdStr.replace("-p", "");
                                                     productIdStr = productIdStr.substring(0, productIdStr.length() - 2);
                                                     String checkProductId = (String) productContentInfo.get("productId");
                                                     if (productIdStr.equalsIgnoreCase(checkProductId)) {
