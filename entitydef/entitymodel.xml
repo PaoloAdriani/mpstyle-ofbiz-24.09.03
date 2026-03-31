@@ -54,4 +54,20 @@ under the License.
         </field>
     </extend-entity>
 
+    <extend-entity entity-name="OrderHeader">
+        <field name="mpIsExportedMpsAcct" type="indicator">
+            <description>Flag that indicates if an order has been exported to MpStyle/Accounting</description>
+        </field>
+    </extend-entity>
+
+    <extend-entity entity-name="ReturnHeader">
+        <field name="mpIsExportedMpsAcct" type="indicator">
+            <description>Flag that indicates if an order has been exported to MpStyle/Accounting</description>
+        </field>
+    </extend-entity>
+
+    <extend-entity entity-name="Product">
+        <field name="mpSizeType" type="short-varchar"></field>
+    </extend-entity>
+
 </entitymodel>

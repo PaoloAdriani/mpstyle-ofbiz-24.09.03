@@ -49,8 +49,7 @@ public class MpstyleServices {
 	private static final String SHIPGROUPSEQID = "00001";
 	private static final String SYSTEM_RESOURCE_ID = "mpstyle";
 
-	public Map<String, Object> createCustomerOrderFileForErp(DispatchContext ctx,
-			Map<String, ? extends Object> context) {
+	public Map<String, Object> createCustomerOrderFileForErp(DispatchContext ctx, Map<String, ? extends Object> context) {
 
 		final String IFLAC = "A";
 		final String ITIPQT = "R";
@@ -64,7 +63,6 @@ public class MpstyleServices {
 		boolean useCustomLogger = true;
 
 		Delegator delegator = ctx.getDelegator();
-
 		String tenantId = delegator.getDelegatorTenantId();
 
 		String outPath = (String) context.get("outPath");
@@ -72,19 +70,12 @@ public class MpstyleServices {
 		String facilityCode = (String) context.get("facilityCode");
 		String useBarcode = (String) context.get("useBarcode");
 
-		List<Order> mpOrderList = new ArrayList<Order>();
+		List<Order> mpOrderList = new ArrayList<>();
 
-		String orderFileName = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.fileName",
-				"Ordini.csv", delegator);
-
-		String logfilename = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.logfilename",
-				delegator);
-
+		String orderFileName = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.fileName","Ordini.csv", delegator);
+		String logfilename = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.logfilename", delegator);
 		String logdirpath = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.logdirpath", delegator);
-
-		String codClPrefix = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.contactMechPrefix",
-				"SOL", delegator);
-
+		String codClPrefix = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.contactMechPrefix", "SOL", delegator);
 		String iFlBulk = EntityUtilProperties.getPropertyValue(SYSTEM_RESOURCE_ID, "orderCsv.isBulk",delegator);	
 
 		// Creation of the custom logger file
@@ -101,19 +92,9 @@ public class MpstyleServices {
 			useCustomLogger = true;
 		}
 
-		if (!outPath.endsWith("/")) {
-			outPath = outPath + "/";
-		}
-
-		if (!historyPath.endsWith("/")) {
-			historyPath = historyPath + "/";
-		}
-
-		if(iFlBulk.isEmpty())
-		{
-			iFlBulk="";
-		}
-
+		outPath = (!outPath.endsWith("/")) ? outPath + "/" : outPath;
+		historyPath = (!historyPath.endsWith("/")) ? historyPath + "/" : historyPath;
+		iFlBulk = UtilValidate.isEmpty(iFlBulk) ? "" : iFlBulk;
 
 		if (useCustomLogger)
 			logger.logInfo("******** START (createCustomerOrderFileForErp) - Time: "
@@ -1255,7 +1236,6 @@ public class MpstyleServices {
 		List<GenericValue> result = null;
 
 		try {
-
 			result = delegator.findList(entityName, EntityCondition.makeCondition(fieldValueMap), null, null, null,
 					false);
 
