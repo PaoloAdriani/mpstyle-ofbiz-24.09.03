@@ -60,7 +60,7 @@ def elaborateXMLFileList() {
 
         if (!ServiceUtil.isSuccess(importFileResultMap)) {
             def errorMsg = ServiceUtil.getErrorMessage(importFileResultMap)
-            logError(errorMsg, method)
+            logError(errorMsg)
             notImportedFiles = notImportedFiles + filename.substring(filename.lastIndexOf("/") + 1) + ","
             notImportedFileCount++
             continue

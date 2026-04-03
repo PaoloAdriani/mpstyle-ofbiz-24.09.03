@@ -34,6 +34,6 @@ under the License.
     <SecurityPermission description="Delete operations in the MpReport Component." permissionId="MPREPORT_DELETE"/>
     <SecurityPermission description="ALL operations in the MpReport Component." permissionId="MPREPORT_ADMIN"/>
 
-    <SecurityGroupPermission groupId="SUPER" permissionId="MPREPORT_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="SUPER" permissionId="MPREPORT_ADMIN"/>
 
 </entity-engine-xml>

@@ -85,8 +85,8 @@ under the License.
         </init-param>
     </filter>
     <filter>
-        <display-name>SameSiteFilter</display-name>
         <filter-name>SameSiteFilter</filter-name>
+        <display-name>SameSiteFilter</display-name>
         <filter-class>org.apache.ofbiz.webapp.control.SameSiteFilter</filter-class>
     </filter>
     <filter-mapping>
