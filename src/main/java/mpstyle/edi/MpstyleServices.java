@@ -1264,9 +1264,18 @@ public class MpstyleServices {
 				if (productPromoAction != null) {
 					String promoType = productPromoAction.getString("productPromoActionEnumId");
 
+					/* Ongoing migration on the codebase: both the fields productPromoActionEnumId and customMethodId
+					 * are used to identify the type of promotion.
+					 */
+					if (UtilValidate.isEmpty(promoType)) {
+						promoType = productPromoAction.getString("customMethodId");
+					}
+
 					BigDecimal amount = productPromoAction.getBigDecimal("amount");
 
-					if (promoType.equals("PROMO_SHIP_CHARGE") && (amount.compareTo(new BigDecimal("100")) == 0)) {
+					if (promoType != null &&
+						( (promoType.equals("PROMO_SHIP_CHARGE") || promoType.equals("PPA_SHIP_CHARGE") ) &&
+						(amount.compareTo(new BigDecimal("100")) == 0))) {
 						result = true;
 					}
 				}
