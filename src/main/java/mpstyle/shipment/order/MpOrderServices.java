@@ -1237,8 +1237,8 @@ public class MpOrderServices {
 		String _sendTo = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.sendTo",delegator);
 		String sendCc = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.sendCc",delegator);
 		String subject = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.subjectMail",delegator);
-		String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "email.username", delegator);
-		String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "email.password", delegator);
+		String username = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+		String password = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
 		
 		StringBuffer sb = new StringBuffer();
 		
@@ -1297,8 +1297,8 @@ public class MpOrderServices {
 		String _sendTo = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.sendTo",delegator);
 		String sendCc = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.sendCc",delegator);
 		String subject = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "email.subject",delegator);
-		String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "email.username", delegator);
-		String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "email.password", delegator);
+		String username = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+		String password = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
         
         // default days to cancel
         int daysTillCancel = 30;
