@@ -51,7 +51,7 @@ public class MpOrderServices {
     private final static String logfilename = "MP_EXPORD_DATA_LOG";
     private final static String LOGISTIC_PARTY_ROLE = "SHIPMENT_CLERK";
     private final static String LOGISTIC_PARTY_EMAIL_PURPOSE = "ORDER_EMAIL";
-    private static String OMNI_SYSTEM_RESOURCE_ID = "mpomni";
+    //private static String OMNI_SYSTEM_RESOURCE_ID = "mpomni";
     private static String MP_SYSTEM_RESOURCE_ID = "mpstyle";
   
     
@@ -834,8 +834,8 @@ public class MpOrderServices {
         boolean test = false;
                 
         //user name and password for services
-        String username = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
-        String password = EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
+        String username = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "serviceUsername", delegator);
+        String password = EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
         
         if(test) {
             
@@ -1544,12 +1544,12 @@ public class MpOrderServices {
 
     public static String getServiceUsername(Delegator delegator) 
     {
-        return EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "serviceUsername",delegator);
+        return EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "serviceUsername",delegator);
     }
     
     public static String getServicePassword(Delegator delegator) 
     {
-        return EntityUtilProperties.getPropertyValue(OMNI_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
+        return EntityUtilProperties.getPropertyValue(MP_SYSTEM_RESOURCE_ID, "servicePassword", delegator);
     }
     
     
